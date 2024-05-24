@@ -8,6 +8,7 @@ import { ServicesModule } from './services/services.module';
 import { InstitutionModule } from './institution/institution.module';
 import { AuthorModule } from './author/author.module';
 import { PublisherModule } from './publisher/publisher.module';
+import { EmployeeModule } from './employee/employee.module';
 
 
 @Module({
@@ -29,6 +30,7 @@ import { PublisherModule } from './publisher/publisher.module';
     InstitutionModule,
     AuthorModule,
     PublisherModule,
+    EmployeeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
