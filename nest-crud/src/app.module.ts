@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { ServicesModule } from './services/services.module';
 import { InstitutionModule } from './institution/institution.module';
+import { AuthorModule } from './author/author.module';
 
 
 @Module({
@@ -25,6 +26,7 @@ import { InstitutionModule } from './institution/institution.module';
       autoLoadEntities: true,
     }),
     InstitutionModule,
+    AuthorModule,
   ],
   controllers: [AppController],
   providers: [AppService],
