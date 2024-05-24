@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ServicesModule } from './services/services.module';
 import { InstitutionModule } from './institution/institution.module';
 import { AuthorModule } from './author/author.module';
+import { PublisherModule } from './publisher/publisher.module';
 
 
 @Module({
@@ -27,6 +28,7 @@ import { AuthorModule } from './author/author.module';
     }),
     InstitutionModule,
     AuthorModule,
+    PublisherModule,
   ],
   controllers: [AppController],
   providers: [AppService],
