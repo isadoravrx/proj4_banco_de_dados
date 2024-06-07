@@ -1,43 +1,47 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Employee } from 'src/employee/entities/employee.entity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn() // Primary Key
-    id: number;
-    
-    @Column()
-    name: string;
+  @PrimaryGeneratedColumn() // Primary Key
+  id: number;
 
-    @Column()
-    secondName: string
+  @Column()
+  name: string;
 
-    @Column()
-    email: string;
+  @Column()
+  secondName: string;
 
-    @Column()
-    phoneNumber: string
+  @Column()
+  email: string;
 
-    @Column()
-    neighborhood: string
+  @Column()
+  phoneNumber: string;
 
-    @Column()
-    complement: string
+  @Column()
+  neighborhood: string;
 
-    @Column()
-    street: string
+  @Column()
+  complement: string;
 
-    @Column({type: "int"})
-    age: number
+  @Column()
+  street: string;
 
-    @Column()
-    CPF: string
+  @Column({ type: 'int' })
+  age: number;
 
-    @Column()
-    RG: string
+  @Column()
+  CPF: string;
 
-    @Column({type: "char", length: 1})
-    gender: string
+  @Column()
+  RG: string;
 
-    @Column({ type: 'date' })
-    dateOfBirth: Date;
+  @Column({ type: 'char', length: 1 })
+  gender: string;
+
+  @Column({ type: 'date' })
+  dateOfBirth: Date;
+
+  @OneToOne(() => Employee, (employee) => employee.user)
+  employee: Employee;
 }
