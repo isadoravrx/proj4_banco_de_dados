@@ -53,26 +53,52 @@ FROM aluno;
 */
 
 
-CREATE TRIGGER atualizar_saldo_cantina_alunos
-AFTER INSERT ON compra
-FOR EACH ROW
+/*atualizar_saldo_cantina*/
+CREATE OR REPLACE FUNCTION atualizar_saldo_cantina()
+RETURNS TRIGGER AS $$
+DECLARE
+    preco_produto_cantina REAL;
 BEGIN
-    DECLARE valor_produto REAL;
-    DECLARE aluno_id INT;   
+    SELECT preco INTO preco_produto_cantina
+    FROM produtos_cantina
+    WHERE nome_produto = NEW.fk_Produtos_cantina_nome_produto;
 
-    SELECT preco INTO valor_produto FROM Produtos_cantina WHERE nome_produto = NEW.fk_Produtos_cantina_nome_produto;
+    UPDATE aluno
+    SET saldo_da_cantina = saldo_da_cantina - preco_produto_cantina
+    WHERE id_da_matricula = NEW.fk_Aluno_id_da_matricula;
 
-    SELECT fk_Aluno_id_da_matricula INTO aluno_id FROM compra WHERE codigo_recibo = NEW.codigo_recibo;
-
-    UPDATE Aluno SET saldo_da_cantina = saldo_da_cantina - valor_produto WHERE id_da_matricula = aluno_id AND fk_pessoa_id = NEW.fk_Aluno_fk_pessoa_id;
+    RETURN NULL;
 END;
+$$ LANGUAGE plpgsql;
 
-CREATE TRIGGER atualizar_qnt_produtos_cantina_compra
+CREATE TRIGGER atualizar_saldo_cantina
 AFTER INSERT ON compra
 FOR EACH ROW
+EXECUTE FUNCTION atualizar_saldo_cantina();
+
+/*
+SELECT saldo_da_cantina, id_da_matricula, nome
+FROM aluno;
+*/
+
+/*diminuir_qtd_produto_cantina*/
+CREATE OR REPLACE FUNCTION diminuir_qtd_produto_cantina()
+RETURNS TRIGGER AS $$
 BEGIN
-    DECLARE produto_nome INT;
+    UPDATE produtos_cantina
+    SET qnt_produtos_cantina = qnt_produtos_cantina - 1
+    WHERE nome_produto = NEW.fk_Produtos_cantina_nome_produto;
 
-    SELECT fk_Produtos_cantina_nome_produto INTO produto_nome FROM contem WHERE fk_venda_id_venda = NEW.fk_venda_id_venda;
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
 
-    UPDATE Produtos_cantina SET qnt_produtos_cantina = qnt_produtos_cantina - 1 WHERE nome_produto = produto_nome;
+CREATE TRIGGER diminuir_qtd_produto_cantina
+AFTER INSERT ON compra
+FOR EACH ROW
+EXECUTE FUNCTION diminuir_qtd_produto_cantina();
+
+/*
+SELECT qnt_produtos_cantina, nome_produto
+FROM Produtos_cantina;
+*/
