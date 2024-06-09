@@ -306,7 +306,8 @@ CREATE TABLE categoria_produto (
 CREATE TABLE contem (
     fk_venda_id_venda int,
     fk_produto_id int,
-    quantidade_produtos int
+    quantidade_produtos int,
+    id_aluno_compra int
 );
 
 CREATE TABLE promove (

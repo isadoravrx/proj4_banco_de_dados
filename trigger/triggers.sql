@@ -1,30 +1,57 @@
 /*triggers*/
 
-CREATE TRIGGER atualizar_qnt_livro_compra
+/*atualizar_qnt_exemplares*/
+CREATE OR REPLACE FUNCTION atualizar_qnt_exemplares()
+RETURNS TRIGGER AS $$
+DECLARE
+    produto_nome varchar;
+BEGIN
+    SELECT nome_produto INTO produto_nome
+    FROM produto
+    WHERE id = NEW.fk_produto_id;
+
+    UPDATE livro
+    SET qtd_exemplares = qtd_exemplares - 1
+    WHERE nome_livro = produto_nome;
+
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER atualizar_qnt_exemplares
 AFTER INSERT ON contem
 FOR EACH ROW
+EXECUTE FUNCTION atualizar_qnt_exemplares();
+
+/*
+SELECT qtd_exemplares, nome_livro
+FROM livro;
+*/
+
+/*atualizar_qnt_exemplares*/
+CREATE OR REPLACE FUNCTION atualizar_qnt_livros_comprados()
+RETURNS TRIGGER AS $$
 BEGIN
-    DECLARE livro_id INT;
+    IF (SELECT fk_categoria_produto_id FROM produto WHERE id = NEW.fk_produto_id) = 1 THEN
+        UPDATE aluno
+        SET quantidade_livros_comprados = quantidade_livros_comprados + 1
+        WHERE id_da_matricula = NEW.id_aluno_compra;
+    END IF;
 
-    SELECT fk_categoria_produto_id INTO livro_id FROM produto WHERE fk_venda_id_venda = NEW.fk_venda_id_venda;
-
-    UPDATE livro SET qtd_exemplares = qtd_exemplares - 1 WHERE id_livro = livro_id;
+    RETURN NULL;
 END;
+$$ LANGUAGE plpgsql;
 
-CREATE TRIGGER atualizar_qnt_livro_alunos 
-AFTER INSERT ON compra
+CREATE TRIGGER atualizar_qnt_livros_comprados
+AFTER INSERT ON contem
 FOR EACH ROW
-BEGIN
-    DECLARE produto_tipo VARCHAR(50);   
-    DECLARE aluno_id INT;
+EXECUTE FUNCTION atualizar_qnt_livros_comprados();
 
-    SELECT tipo INTO produto_tipo FROM produto WHERE id = NEW.fk_produto_id;
-    
-    IF produto_tipo = 'livro' THEN
-        SELECT fk_Aluno_id_da_matricula INTO aluno_id FROM compra WHERE codigo_recibo = NEW.codigo_recibo;
+/*
+SELECT quantidade_livros_comprados, id_da_matricula, nome
+FROM aluno;
+*/
 
-        UPDATE Aluno SET quantidade_livros_comprados = quantidade_livros_comprados + 1 WHERE id_da_matricula = aluno_id  AND fk_pessoa_id = NEW.fk_Aluno_fk_pessoa_id;
-END;
 
 CREATE TRIGGER atualizar_saldo_cantina_alunos
 AFTER INSERT ON compra
