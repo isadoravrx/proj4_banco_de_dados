@@ -266,7 +266,7 @@ CREATE TABLE material_papelaria (
     fk_produto_id_produto int PRIMARY KEY,
     fk_fornecedor_cnpj varchar,
     fk_instituicao_cnpj varchar,
-    fk_selo_inmetro_id_registro int
+    fk_selo_inmetro_num_registro int
 );
 
 CREATE TABLE produto (
@@ -297,9 +297,8 @@ CREATE TABLE categoria_produto (
 
 CREATE TABLE matriz_escolar (
     turma varchar,
-    serie int,
-    turno varchar,
-    id_matriz int PRIMARY KEY
+    id_matriz int PRIMARY KEY,
+    fk_turno_id_serie varchar
 );
 
 CREATE TABLE informacoes_evento (
@@ -319,9 +318,19 @@ CREATE TABLE metodo_pagamento (
 );
 
 CREATE TABLE selo_inmetro (
-    marca varchar,
-    certificado varchar,
-    id_registro int PRIMARY KEY
+    situacao_registro varchar,
+    num_registro int PRIMARY KEY
+);
+
+CREATE TABLE turno (
+    id_serie varchar PRIMARY KEY,
+    nome_turno varchar
+);
+
+CREATE TABLE tipo_teste (
+    certificado_inmetro varchar,
+    id_tipo_teste varchar PRIMARY KEY,
+    fk_selo_inmetro_num_registro int
 );
 
 CREATE TABLE contem (
@@ -609,8 +618,8 @@ ALTER TABLE material_papelaria ADD CONSTRAINT FK_material_papelaria_4
     ON DELETE RESTRICT;
  
 ALTER TABLE material_papelaria ADD CONSTRAINT FK_material_papelaria_5
-    FOREIGN KEY (fk_selo_inmetro_id_registro)
-    REFERENCES selo_inmetro (id_registro)
+    FOREIGN KEY (fk_selo_inmetro_num_registro)
+    REFERENCES selo_inmetro (num_registro)
     ON DELETE SET NULL;
  
 ALTER TABLE produto ADD CONSTRAINT FK_produto_2
@@ -622,6 +631,16 @@ ALTER TABLE lista_materiais ADD CONSTRAINT FK_lista_materiais_2
     FOREIGN KEY (fk_matriz_escolar_id_matriz)
     REFERENCES matriz_escolar (id_matriz)
     ON DELETE CASCADE;
+ 
+ALTER TABLE matriz_escolar ADD CONSTRAINT FK_matriz_escolar_2
+    FOREIGN KEY (fk_turno_id_serie)
+    REFERENCES turno (id_serie)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE tipo_teste ADD CONSTRAINT FK_tipo_teste_2
+    FOREIGN KEY (fk_selo_inmetro_num_registro)
+    REFERENCES selo_inmetro (num_registro)
+    ON DELETE RESTRICT;
  
 ALTER TABLE contem ADD CONSTRAINT FK_contem_1
     FOREIGN KEY (fk_venda_id_venda)
