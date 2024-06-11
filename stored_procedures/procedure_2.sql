@@ -1,8 +1,5 @@
-CREATE OR REPLACE PROCEDURE calcular_total_vendas_produto(
-    produto_id INT,
-    data_inicio DATE,
-    data_fim DATE
-)
+CREATE OR REPLACE PROCEDURE calcular_total_vendas_produto
+(produto_id INT, data_inicio DATE, data_fim DATE)
 LANGUAGE plpgsql
 AS $$
 BEGIN
