@@ -76,6 +76,7 @@ Grupo:
 <a href = "https://github.com/isadoravrx/proj4_banco_de_dados/blob/main/seguranca/seguranca.sql">[Visualização da segurança]</a>
 <br/>
 <br/>
+
 ### > Normalização:
 
 Modificações:
