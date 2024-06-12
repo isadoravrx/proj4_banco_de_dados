@@ -7,6 +7,10 @@ Grupo:
 - Maria Eduarda Santana da Silva Barros
 <br/><br/>
 
+### Visualização da apresentação em slides
+<a href = "https://github.com/isadoravrx/proj4_banco_de_dados/blob/main/apresentacao_slide.pdf">Slides</a>
+<br/>
+
 ### > Triggers:
 > <a href = "https://github.com/isadoravrx/proj4_banco_de_dados/blob/main/trigger/triggers.sql">Arquivo com Triggers</a>
 
