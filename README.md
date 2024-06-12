@@ -68,9 +68,9 @@ Grupo:
 <br/>
 
 ###  > Segurança: 
-1. Apenas coordenadores pode inserir ou deletar a tabela disciplina.  <br/>
-2. Apenas os gerentes da escola pode inserir ou deletar a tabela departamento.  <br/>
-3. Apenas os vendedores da livraria pode inserir ou deletar a tabela cadastro.  <br/>
+1. Apenas coordenadores podem inserir ou deletar a tabela disciplina.  <br/>
+2. Apenas os gerentes da escola podem inserir ou deletar a tabela departamento.  <br/>
+3. Apenas os vendedores da livraria podem inserir ou deletar a tabela cadastro.  <br/>
 4. Apenas organizadores de evento da livraria podem inserir ou deletar a tabela palestra_debate.  <br/>
   <br/>
 <a href = "https://github.com/isadoravrx/proj4_banco_de_dados/blob/main/seguranca/seguranca.sql">[Visualização da segurança]</a>
