@@ -22,15 +22,15 @@ Grupo:
    > <a href = "https://github.com/isadoravrx/proj4_banco_de_dados/blob/main/stored_procedures/procedure_1.sql">[Implementação]</a>
 
 **2. Calcular total vendas do produto**
-   Calcula o total de vendas do produto em um intervalo de tempo<br/>
+   > Calcula o total de vendas do produto em um intervalo de tempo<br/>
    > <a href = "https://github.com/isadoravrx/proj4_banco_de_dados/blob/main/stored_procedures/procedure_2.sql">[Implementação]</a>
 
 **3. Criar  relatório de vendas do vendedor**
-   Cria um relatório de vendas de um vendedor em um intervalo de tempo<br/>
+   > Cria um relatório de vendas de um vendedor em um intervalo de tempo<br/>
    > <a href = "https://github.com/isadoravrx/proj4_banco_de_dados/blob/main/stored_procedures/procedure_3.sql">[Implementação]</a>
 
 **4. Criar relatório de melhores vendedores**
-   Cria um relatório para exibir os melhores vendedores em um intervalo<br/>
+   > Cria um relatório para exibir os melhores vendedores em um intervalo<br/>
    > <a href = "https://github.com/isadoravrx/proj4_banco_de_dados/blob/main/stored_procedures/procedure_4.sql">[Implementação]</a>
 
 <br/>
