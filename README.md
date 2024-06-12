@@ -71,8 +71,39 @@ Grupo:
   <br/>
 
 ### > Normalização:
+
+Modificações:
+- Tabela palestra_debate
+  > 3FN: Foi criada uma nova tabela para referenciar a lotação máxima de uma sala, que não depende da chave primária<br/>
+  id_evento, mas depende de qual sala acontecerá o evento, que é um atributo não-chave. Assim, será identificada a<br/>
+  partir de uma chave estrangeira que relaciona cada sala com sua capacidade.
+
+- Tabela servico
+  > 3FN: Foi criada uma nova tabela para referenciar a taxa_servico que pertence a cada tipo de serviço. Isso porque<br/>
+  a taxa não depende do id_servico, mas depende do tipo do serviço (dependência entre dois atributos não-chave).<br/>
+  Assim, quando o tipo for “retirada” a taxa sempre será R$0; sempre que for “entrega” a taxa terá um valor fixo de<br/>
+  R$15 e quando “download”, R$5. Portanto, a taxa será identificada a partir de uma chave estrangeira tipo_servico.
+
+- Tabela venda
+  > 3FN: Foi criada uma nova tabela para referenciar o desconto no valor do produto, que se relaciona com cada método de<br/>
+  pagamento. Isso porque quando o método for pix ou dinheiro há um desconto no valor do produto. Assim, o desconto<br/>
+  não depende da chave primária id_venda, porém, há uma dependência do desconto com o método de pagamento, que<br/>
+  são ambos atributos não-chave. Portanto, foi necessária a modificação.
   
+- Tabela material_papelaria
+  > 3FN: Foi criada uma nova tabela sobre a certificação do inmetro pois o tipo_teste não é gerado e não tem dependência do<br/>
+  fk_id_produto, porém, o certificado do inmetro depende do tipo_teste realizado, assim, um atributo não chave depende de<br/>
+  outro atributo não-chave. 
+  
+- Tabela aluno
+  > 3FN: Foi criada uma nova tabela para referenciar o turno de um aluno a partir da sua série. Isso porque não existe dependência<br/>
+  do turno com a chave primária id_matriz_escolar, mas o turno em uma escola depende apenas da série (atributo não-chave), pois apenas
+  ensino médio estuda à tarde enquanto fundamental pela manhã.
 <br/>
+   <a href = "https://github.com/isadoravrx/proj4_banco_de_dados/blob/main/normalizacao/documentacao_normalizacao.pdf">[Visualizar documentação de normalização]</a>
+<br/>
+<br/>
+
 
 ### > CRUD:
 > <a href = "https://github.com/isadoravrx/proj4_banco_de_dados/tree/main/nest-crud">Implementação do CRUD</a>
